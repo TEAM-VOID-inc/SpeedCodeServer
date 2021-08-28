@@ -12,7 +12,6 @@ const {getcodechefdata} = require('./socket/codechef');
 
 //connection uri and port
 const connUri = process.env.MONGO_LOCAL_CONN_URL;
-const port = process.env.PORT;
 
 const app = express();
 
@@ -37,7 +36,6 @@ mongoose.promise = global.Promise;
 mongoose.connect(connUri, { useNewUrlParser: true , useCreateIndex: true,  useUnifiedTopology: true, useFindAndModify: true });
 
 const connection = mongoose.connection;
-
 connection.on('error', (err) => {
     process.exit();
 });
@@ -67,8 +65,8 @@ io.on("connection", socket => {
     getcodeforcesdata(socket);
     getspojdata(socket);
     getcodechefdata(socket);
-    socket.on("disconnect");
+    socket.on("disconnect", () => console.log("CLIENT DISCONNECT"));
 });
 
 //listening server
-server.listen(port);
+server.listen(process.env.PORT || 3001);
