@@ -11,8 +11,8 @@ const {getcodechefdata} = require('./socket/codechef');
 
 
 //connection uri and port
-const connUri = process.env.MONGO_LOCAL_CONN_URL;
-const port = process.env.PORT || 3001;
+const connUri = Process.env.MONGO_LOCAL_CONN_URL;
+const port = Process.env.PORT || 3001;
 
 const app = express();
 
