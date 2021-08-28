@@ -21,10 +21,13 @@ exports.store = async(req, res) => {
     try {
         const {email} = req.body;
 
+        if(!req.headers.host)
+            return res.status(400).json({success: false,message: 'Front site Link not provided'});
+
         const user = await User.findOne({email});
 
         if(user)
-            return res.status(401).json({message: 'Email already Exists'});
+            return res.status(401).json({success: false,message: 'Email already Exists'});
 
         const password = '_' + Math.random().toString(36).substr(2, 9);
         const newUser = new User({...req.body, password});
@@ -40,7 +43,7 @@ exports.store = async(req, res) => {
         let to = user.email;
         let from = process.env.FROM_EMAIL;
         let text = "New Account Created";
-        let link = process.env.AUTH_RESET_PASSWORD  + user.resetPasswordToken;
+        let link = req.headers.host  + user.resetPasswordToken;
         let html = `<p>Hi user<p><br><p>A new account has been created for you on ${domain}. Please click on the following <a href="${link}">link</a> to set your password and login.</p><br><p>If you did not request this, please ignore this email.</p>`
 
         await sendEmail({ subject, text, html, to , from});

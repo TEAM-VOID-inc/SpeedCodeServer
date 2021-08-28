@@ -87,7 +87,6 @@ exports.getGFG = async ({id}) => {
         return ({success: true,questionsdone});
 
     } catch (error) {
-        console.log("error", erorr);
     }
 }
 

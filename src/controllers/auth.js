@@ -6,6 +6,10 @@ const VerifyEmailTemplate = require('../template/verifymailtemplate');
 
 async function sendVerificationEmail(user, req, res){
     try{
+
+        if(!req.headers.host)
+        return res.status(400).json({success: false,message: 'Front site Link not provided'});
+
         const token = user.generateVerificationToken();
 
         // Save the verification token
@@ -15,7 +19,7 @@ async function sendVerificationEmail(user, req, res){
         let to = user.email;
         let from = process.env.FROM_EMAIL;
         let text = "Account Verification"
-        let link= process.env.AUTH_VERIFY_LINK + token.token;
+        let link= req.headers.host + token.token;
         let html = VerifyEmailTemplate.html({link})
 
         await sendEmail({ subject, text, html, to , from});

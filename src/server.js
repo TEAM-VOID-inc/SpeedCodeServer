@@ -37,9 +37,8 @@ mongoose.promise = global.Promise;
 mongoose.connect(connUri, { useNewUrlParser: true , useCreateIndex: true,  useUnifiedTopology: true, useFindAndModify: true });
 
 const connection = mongoose.connection;
-connection.once('open', () => console.log('MongoDB connected sucessfully'));
+
 connection.on('error', (err) => {
-    console.log("MongoDB connection error" + err);
     process.exit();
 });
 
@@ -64,14 +63,12 @@ const io = require("socket.io")(server, {
 
 
 io.on("connection", socket => {
-    console.log("New client connected"), 
-    console.log("Client socket id ",socket.id);
     getgfgdata(socket);
     getcodeforcesdata(socket);
     getspojdata(socket);
     getcodechefdata(socket);
-    socket.on("disconnect", () => console.log("CLIENT DISCONNECT"));
+    socket.on("disconnect");
 });
 
 //listening server
-server.listen(port, () => console.log(`Listening on port ${port}`));
+server.listen(port);

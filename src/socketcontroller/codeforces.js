@@ -32,6 +32,5 @@ exports.gettopicbyid = async ({id, pageid}) => {
         return ({success: true,questions});
 
     } catch (error) {
-        console.log("error", error);
     }
 }

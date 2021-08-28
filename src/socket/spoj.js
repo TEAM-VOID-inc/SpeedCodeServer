@@ -5,11 +5,9 @@ var loop;
 const getspojandemit = (socket, payload) => {
     loop = setInterval(async() =>{
         try {
-            console.log("spojdata function is running", payload)
             const data = await gettopicbyid ({id : payload.id, pageid: payload.pageid});
             socket.emit("spojdata", data);
         } catch (error) {
-            console.log("Error ; ", error);
         }
     }, 60000)
 }
@@ -22,11 +20,9 @@ function stopemitting(){
 
 const getspojdata = (socket) => {
     socket.on("spojdata", payload => {
-        console.log("What is payload spojdata", payload);
         getcodeforcesandemit(socket, payload);
         
         socket.on("disconnect", () => {
-            console.log("Client spojdata disConnected");
             stopemitting();
         })
     })

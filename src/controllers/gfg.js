@@ -4,7 +4,6 @@ const User = require('../models/user');
 const GFGTopic = require('../models/gfgTopic');
 
 
-
 exports.getGFG = async (req, res) => {
     try {
         const id= req.params.id;
