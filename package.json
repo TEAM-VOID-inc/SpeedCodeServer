@@ -4,7 +4,7 @@
   "description": "SpeedCode Server",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js"
+    "serve -s build": "node src/server.js"
   },
   "author": "Yogesh",
   "license": "ISC",
