@@ -12,6 +12,8 @@ const {getcodechefdata} = require('./socket/codechef');
 
 //connection uri and port
 const connUri = process.env.MONGO_LOCAL_CONN_URL;
+const host = '0.0.0.0';
+const port = process.env.PORT || 3001;
 
 const app = express();
 
@@ -36,7 +38,9 @@ mongoose.promise = global.Promise;
 mongoose.connect(connUri, { useNewUrlParser: true , useCreateIndex: true,  useUnifiedTopology: true, useFindAndModify: true });
 
 const connection = mongoose.connection;
+connection.once('open', () => console.log('MongoDB connected sucessfully'));
 connection.on('error', (err) => {
+    console.log("MongoDB connection error" + err);
     process.exit();
 });
 
@@ -69,4 +73,4 @@ io.on("connection", socket => {
 });
 
 //listening server
-server.listen(process.env.PORT, '0.0.0.0');
+server.listen(port, host, () => console.log(`Listening on port ${port}`));
