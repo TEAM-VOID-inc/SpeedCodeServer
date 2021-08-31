@@ -18,7 +18,11 @@ const port = process.env.PORT || 3001;
 const app = express();
 
 //for cors origin platform
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+    allowedHeaders :  ['Content-Type', 'Authorization', 'host']
+}));
 
 
 // for parsing application/json

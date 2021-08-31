@@ -7,9 +7,6 @@ const ResetMailTemplate = require('../template/Resetmailtemplate');
 //send Email to reset password
 
 exports.recover = async(req,res,next) => {
-    if(!req.headers.host)
-        return res.status(400).json({success: false,message: 'Front site Link not provided'});
-
     try {
         const {email} = req.body;
 
@@ -17,16 +14,14 @@ exports.recover = async(req,res,next) => {
 
         if(!user)
             return res.status(404).json({success: false,message: 'Email address not Registerd'});
-        
+            
         user.generatePasswordReset();
-
         await user.save();
-
         let subject =  "Password change request";
         let to = user.email;
         let from = process.env.FROM_EMAIL;
         let text = "Password change request"
-        let link = req.headers.host  + user.resetPasswordToken;
+        let link = process.env.AUTH_RESET_PASSWORD  + user.resetPasswordToken;
         let html = ResetMailTemplate.html({link})
 
         await sendEmail({ subject, text, html, to , from});
@@ -50,7 +45,6 @@ exports.reset = async (req, res) => {
         if (!user) 
             return res.status(401).json({success: false,message: 'Password reset token is invalid or has expired.'});
 
-            res.render('reset', {user});
             res.status(200).json({success: true,message: 'A link is created to reset Password. Check Your Email'})
     } catch (error) {
         res.status(500).json({success: false,message: error.message})
