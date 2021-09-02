@@ -31,13 +31,13 @@ router.delete('/:id', User.destroy);
 router.post('/admin/:id', User.makeadmin);
 
 //Vediodonemark
-router.post('/vediomark',[
+router.post('/vediomark/:id',[
     check('userId').not().isEmpty().withMessage({success:false,message:'UserId is required'}),
     check('vedioId').not().isEmpty().withMessage({success:false,message:'vedioId is required'})
 ], validate, Vediomark.vediomarkdone)
 
 //vediodoneunmark
-router.post('/vediounmark',[
+router.post('/vediounmark/:id',[
     check('userId').not().isEmpty().withMessage({success:false,message:'UserId is required'}),
     check('vedioId').not().isEmpty().withMessage({success:false,message:'vedioId is required'})
 ], validate, Vediomark.vedioumarkdone)

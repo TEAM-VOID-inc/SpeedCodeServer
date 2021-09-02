@@ -4,9 +4,8 @@ const Playlist = require('../models/playlist');
 
 exports.vediomarkdone = async (req, res)=>{
     try {
-        const {userId, vedioId} = req.body;
-        
-        console.log(userId);
+        const userId= req.params.id;
+        const vedioId = req.query.vedioid;
 
         const user = await User.findById(userId);
 
@@ -26,7 +25,8 @@ exports.vediomarkdone = async (req, res)=>{
 
 exports.vedioumarkdone = async (req, res)=>{
     try {
-        const {userId, vedioId} = req.body;
+        const userId= req.params.id;
+        const vedioId = req.query.vedioid;
 
         const user = await User.findById(userId);
 
