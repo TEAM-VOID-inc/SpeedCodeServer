@@ -24,7 +24,7 @@ exports.gettopicbyid = async (req, res) => {
         if(user.spojid=== undefined || user.spojid === null)
             return res.status(400).json({success: false,message: 'spojid is null'});
 
-        const pageid = req.body.pageid;
+        const pageid = req.query.pageid;
 
         const questions = await getquestions({id: pageid})
         

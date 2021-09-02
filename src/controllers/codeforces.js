@@ -22,7 +22,7 @@ exports.gettopicbyid = async (req, res) => {
         if(user.Codeforcesid=== undefined || user.Codeforcesid === null)
             return res.status(400).json({success: false,message: 'Codeforcesid is null'});
 
-        const pageid = req.body.pageid;
+        const pageid = req.query.pageid;
 
         const questions = await getquestions({id: parseInt(pageid)})
         
