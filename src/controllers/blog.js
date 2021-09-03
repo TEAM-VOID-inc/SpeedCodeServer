@@ -7,6 +7,8 @@ exports.addblog = async (req, res)=>{
     try {
         const Blogger = await User.findById(req.body.userId);
 
+        console.log(req.body);
+
         const newBlog = req.body;
         delete newBlog.userId;
 
@@ -86,6 +88,22 @@ exports.updateblog = async(req, res) => {
     }
 }
 
+//getblogbyid
+exports.getblogbyid = async(req, res) => {
+    try{
+        const id = req.params.id;
+
+        const blog = await Blog.findById(id);
+
+        if(!blog){
+            return  res.status(404).json({message: "Blog Doesnot exits"});
+        }
+
+        res.status(200).json({success: true,blog});
+    } catch (error) {
+        res.status(500).json({success: false, message: error.message})
+    }
+}
 
 
 

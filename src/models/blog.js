@@ -7,7 +7,7 @@ const blogSchema = new Schema({
         required: true,
     },
     description: {
-        type: String,
+        type: Object,
         required: true,
     },
     userId: {

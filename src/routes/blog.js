@@ -6,6 +6,8 @@ const validate = require('../middlewares/validator');
 
 const router = express.Router();
 
+router.get('/user/:id', Blog.getuserblog);
+
 router.get('/', Blog.getallblog);
 
 router.post('/',  [
@@ -15,7 +17,7 @@ router.post('/',  [
 ], validate, Blog.addblog);
 
 
-router.get('/:id', Blog.getuserblog);
+router.get('/:id', Blog.getblogbyid);
 
 router.put('/:id', Blog.updateblog);
 

@@ -75,4 +75,4 @@ io.on("connection", socket => {
 });
 
 //listening server
-server.listen(port, host);
+server.listen(port, host, () => console.log(port));

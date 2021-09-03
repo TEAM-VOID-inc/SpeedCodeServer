@@ -28,7 +28,6 @@ const createTransporter = async () => {
         }
     });
 
-    console.log(transporter);
 return transporter;
 };
 
