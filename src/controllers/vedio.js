@@ -51,6 +51,21 @@ exports.getallvedio = async (req, res)=>{
     }
 }
 
+//get vedio by id 
+exports.getvediobyid = async(req, res) =>{
+    try {
+        const VedioId = req.params.id;
+        const vedio = await Vedio.findById(VedioId);
+        if(!vedio)
+            return res.status(404).json({success: false,message: "Vedio not exists"});
+
+        res.status(200).json({success: true,vedio});
+
+    } catch (error) {
+        res.status(500).json({success: false, message: error.message})
+    }
+}
+
 
 //get user vedios
 exports.getuservedio = async(req, res) =>{

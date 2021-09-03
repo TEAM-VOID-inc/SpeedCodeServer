@@ -6,6 +6,7 @@ const validate = require('../middlewares/validator');
 
 const router = express.Router();
 
+router.get('/getvedio/:id', vedio.getvediobyid);
 
 router.get('/', [
     check('userId').not().isEmpty().withMessage({success:false,message:'userId is required'}),
